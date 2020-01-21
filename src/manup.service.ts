@@ -188,13 +188,10 @@ export class ManUpService {
       debugger;
       const response = await this.http
           .get(this.config.url).pipe(
-            map((response: Response) => {
+            map((response: ManUpData) => {
               debugger;
-              return response.json()})
+              return response})
           ).toPromise();
-      debugger;
-      alert("response " + JSON.stringify(response));
-      alert("this.storage ? " + this.storage ? true: false);
       if (this.storage) {
         this.saveMetadata(response).catch(() => {});
       }
