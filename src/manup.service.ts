@@ -188,7 +188,9 @@ export class ManUpService {
       debugger;
       const response = await this.http
           .get(this.config.url).pipe(
-            map((response: Response) => response.json())
+            map((response: Response) => {
+              debugger;
+              return response.json()})
           ).toPromise();
       debugger;
       alert("response " + JSON.stringify(response));
