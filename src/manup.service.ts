@@ -10,6 +10,7 @@ import {AlertController, Platform} from "@ionic/angular";
 import {HttpClient} from "@angular/common/http";
 import {InAppBrowser} from "@ionic-native/in-app-browser/ngx";
 import {Storage} from '@ionic/storage';
+import {map} from "rxjs/operators";
 
 
 /**
@@ -179,8 +180,9 @@ export class ManUpService {
   public async metadata(): Promise<ManUpData> {
     try {
       const response = await this.http
-          .get(this.config.url)
-          .toPromise();
+          .get(this.config.url).pipe(
+            map((response: Response) => response.json())
+          ).toPromise();
 
       if (this.storage) {
         this.saveMetadata(response).catch(() => {});
@@ -286,7 +288,8 @@ export class ManUpService {
               : `${name} Unavailable`,
           subHeader: this.translate
               ? this.translate.instant('manup.maintenance.text', { app: name })
-              : `${name} is currently unavailable. Please check back later`
+              : `${name} is currently unavailable. Please check back later`,
+          cssClass: 'app-update-alert',
         }).then(alert => alert.present());
       });
     });
@@ -308,6 +311,7 @@ export class ManUpService {
           subHeader: this.translate
               ? this.translate.instant('manup.mandatory.text', { app: name })
               : `An update to ${name} is required to continue.`,
+          cssClass: 'app-update-alert',
           buttons: [
             {
               text: this.translate ? this.translate.instant('manup.buttons.update') : 'Update',
@@ -338,6 +342,7 @@ export class ManUpService {
           subHeader: this.translate
               ? this.translate.instant('manup.optional.text', { app: name })
               : `An update to ${name} is available. Would you like to update?`,
+          cssClass: 'app-update-alert',
           buttons: [
             {
               text: this.translate ? this.translate.instant('manup.buttons.later') : 'Not Now',
