@@ -185,10 +185,12 @@ export class ManUpService {
   public async metadata(): Promise<ManUpData> {
     alert("testtttt");
     try {
+      debugger;
       const response = await this.http
           .get(this.config.url).pipe(
             map((response: Response) => response.json())
           ).toPromise();
+      debugger;
       alert("response " + JSON.stringify(response));
       alert("this.storage ? " + this.storage ? true: false);
       if (this.storage) {
