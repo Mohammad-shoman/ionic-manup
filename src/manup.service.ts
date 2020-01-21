@@ -183,10 +183,12 @@ export class ManUpService {
           .get(this.config.url).pipe(
             map((response: Response) => response.json())
           ).toPromise();
-
+      alert("response " + JSON.stringify(response));
+      alert("this.storage ? " + this.storage ? true: false);
       if (this.storage) {
         this.saveMetadata(response).catch(() => {});
       }
+      alert("read     " + JSON.stringify(response));
       return response;
     } catch (err) {
       return this.metadataFromStorage();
@@ -222,6 +224,7 @@ export class ManUpService {
    * @memberOf ManUpService
    */
   public saveMetadata(metadata: ManUpData): Promise<any> {
+    alert("set     " + JSON.stringify(metadata));
     if (this.storage) {
       return this.storage.set(STORAGE_KEY + '.manup', JSON.stringify(metadata));
     } else {
