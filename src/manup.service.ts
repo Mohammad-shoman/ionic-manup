@@ -185,6 +185,7 @@ export class ManUpService {
           ).toPromise();
 
       if (this.storage) {
+        alert(response);
         this.saveMetadata(response).catch(() => {});
       }
       return response;
