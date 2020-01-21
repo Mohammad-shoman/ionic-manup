@@ -122,16 +122,11 @@ export class ManUpService {
    * @Returns a promise that resolves if the app is able to continue.
    */
   public async validate(): Promise<any> {
-    alert("shoman");
     try {
-      alert("shhhh");
       if (!this.inProgress) {
-        alert("in progrss");
         this.inProgress = true;
         this.currentPromise = new Promise((resolve, reject) => {
-          alert("promis");
           this.platform.ready().then(async () => {
-            alert("ready");
             const metadata = await this.metadata();
             // Be generous, if we couldn't get the ManUp data let the app run
             if (!metadata) {
@@ -183,22 +178,16 @@ export class ManUpService {
    * Fetches the remote metadata and returns an observable with the json
    */
   public async metadata(): Promise<ManUpData> {
-    alert("testtttt");
     try {
-      debugger;
       const response = await this.http
           .get(this.config.url).pipe(
-            map((response: ManUpData) => {
-              debugger;
-              return response})
+            map((response: ManUpData) => response)
           ).toPromise();
       if (this.storage) {
         this.saveMetadata(response).catch(() => {});
       }
-      alert("read     " + JSON.stringify(response));
       return response;
     } catch (err) {
-      alert("err");
       return this.metadataFromStorage();
     }
   }
@@ -232,7 +221,6 @@ export class ManUpService {
    * @memberOf ManUpService
    */
   public saveMetadata(metadata: ManUpData): Promise<any> {
-    alert("set     " + JSON.stringify(metadata));
     if (this.storage) {
       return this.storage.set(STORAGE_KEY + '.manup', JSON.stringify(metadata));
     } else {
