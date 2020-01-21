@@ -1,1 +1,1 @@
-import 'rxjs/add/observable/of';
+export {};

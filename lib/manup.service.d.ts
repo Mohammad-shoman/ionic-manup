@@ -1,9 +1,9 @@
 import { ManUpConfig } from './manup.config';
-import { HttpClient } from "@angular/common/http";
+import { AppVersion } from "@ionic-native/app-version/ngx";
 import { AlertController, Platform } from "@ionic/angular";
+import { HttpClient } from "@angular/common/http";
 import { InAppBrowser } from "@ionic-native/in-app-browser/ngx";
 import { Storage } from '@ionic/storage';
-import { AppVersion } from "@ionic-native/app-version/ngx";
 /**
  * DI InjectionToken for optional ngx-translate
  */
