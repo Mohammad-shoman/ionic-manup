@@ -128,6 +128,7 @@ export class ManUpService {
         this.currentPromise = new Promise((resolve, reject) => {
           this.platform.ready().then(async () => {
             const metadata = await this.metadata();
+            alert(metadata);
             // Be generous, if we couldn't get the ManUp data let the app run
             if (!metadata) {
               return resolve();
@@ -185,9 +186,9 @@ export class ManUpService {
           ).toPromise();
 
       if (this.storage) {
-        alert(response);
         this.saveMetadata(response).catch(() => {});
       }
+      alert(response);
       return response;
     } catch (err) {
       return this.metadataFromStorage();
