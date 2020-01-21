@@ -1,7 +1,2 @@
 node_modules
-lib
-*.d.ts
-*.js.map
-*.js
-*.un~
 coverage
